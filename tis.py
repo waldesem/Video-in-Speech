@@ -23,5 +23,5 @@ with AudioFile(filename.stem + ".wav") as source:
 text = r.recognize_vosk(data, language="ru")
 
 # Print the text
-with open(filename.stem + ".txt", "w+", encoding="utf-8") as f:
+with Path.open(filename.stem + ".txt", "w+", encoding="utf-8") as f:
     f.writelines(text)
