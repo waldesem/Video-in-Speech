@@ -1,11 +1,11 @@
-# Video-in-Speech
+# Media-in-Speech
 
-A Python GUI application that converts video files to text using speech recognition technology.
+A Python GUI application that converts media files to text using speech recognition technology.
 
 ## Features
 
 - **Easy-to-use GUI** - Simple tkinter-based interface
-- **Multiple video formats** - Supports MP4, AVI, MOV, MKV, WMV, FLV
+- **Multiple media formats** - Supports MP4, AVI, MOV, MKV, MP3, WAV, OGG.
 - **Real-time progress tracking** - Visual progress bar with status updates
 - **Automatic file management** - Saves text files in the same directory as source video
 - **Cross-platform compatibility** - Works on Windows, macOS, and Linux
@@ -53,14 +53,13 @@ python tis.py
 
 2. **Convert video to text:**
    - Click "Browse" to select a video file
-   - Choose the language (Russian or English)
    - Click "Convert to Text"
    - Wait for the conversion to complete
    - Click "Open Folder" to view the generated text file
 
 ## How It Works
 
-1. **Audio Extraction** - Uses MoviePy to extract audio from video files
+1. **Audio Extraction** - Uses MoviePy to extract audio from media files
 2. **Audio Processing** - Converts audio to WAV format for speech recognition
 3. **Speech Recognition** - Uses Vosk for offline speech-to-text conversion
 4. **Text Output** - Saves the transcribed text to a .txt file
@@ -68,13 +67,14 @@ python tis.py
 
 ## Supported Formats
 
-### Input Video Formats
+### Input Media Formats
 - MP4
 - AVI
 - MOV
 - MKV
-- WMV
-- FLV
+- MP3
+- WAV
+- OGG
 
 ### Output
 - Plain text (.txt) files with UTF-8 encoding

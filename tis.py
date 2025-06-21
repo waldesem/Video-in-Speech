@@ -1,12 +1,12 @@
 """Video to text converter with GUI."""
 
 import os
-import threading
 import tkinter as tk
 from pathlib import Path
+from threading import Thread
 from tkinter import filedialog, messagebox, ttk
 
-from moviepy import VideoFileClip
+from moviepy import AudioFileClip, VideoFileClip
 from speech_recognition import AudioFile, Recognizer
 
 
@@ -92,8 +92,8 @@ class VideoToTextConverter:
     def browse_file(self) -> None:
         """Open file dialog to select video file."""
         file_types = [
-            ("Video files", "*.mp4 *.avi *.mov *.mkv *.wmv *.flv"),
-            ("All files", "*.*"),
+            ("Video files", "*.mp4 *.avi *.mov *.mkv"),
+            # ("Audio files", "*.mp3 *.wav *.ogg"),
         ]
 
         filename = filedialog.askopenfilename(
@@ -122,7 +122,7 @@ class VideoToTextConverter:
         self.progress_label.config(text="Converting video to text...")
 
         # Run conversion in separate thread to prevent GUI freezing
-        thread = threading.Thread(target=self.convert_video)
+        thread = Thread(target=self.convert_video)
         thread.daemon = True
         thread.start()
 
@@ -137,17 +137,23 @@ class VideoToTextConverter:
 
             # Load the video
             self.progress_bar.step(10)
-            video = VideoFileClip(str(self.selected_file))
+            if self.selected_file.suffix.lower() in (".mp4", ".avi", ".mov", ".mkv"):
+                video = VideoFileClip(str(self.selected_file))
+                audio_file = video.audio
+            elif self.selected_file.suffix.lower() in (".mp3", ".wav", ".ogg"):
+                audio_file = AudioFileClip(str(self.selected_file))
 
             # Extract the audio from the video
             self.progress_bar.step(10)
-            audio_file = video.audio
             wav_filename = self.selected_file.parent / f"{self.selected_file.stem}.wav"
             audio_file.write_audiofile(str(wav_filename), logger=None)
 
             # Clean up video object
             self.progress_bar.step(10)
-            video.close()
+            if self.selected_file.suffix.lower() in (".mp4", ".avi", ".mov", ".mkv"):
+                video.close()
+            else:
+                audio_file.close()
 
             # Update progress
             self.progress_bar.step(10)
