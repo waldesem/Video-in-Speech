@@ -37,7 +37,6 @@ pip install -r requirements.txt
 
 3. **Install Vosk models (for offline recognition):**
 ```bash
-# For Russian
 wget https://alphacephei.com/vosk/models/vosk-model-ru-0.42.zip
 unzip vosk-model-ru-0.42.zip
 mv vosk-model-ru-0.42 model
@@ -48,7 +47,7 @@ mv vosk-model-ru-0.42 model
 
 1. **Run the application:**
 ```bash
-python tis.py
+python mit.py
 ```
 
 2. **Convert video to text:**
@@ -63,7 +62,7 @@ python tis.py
 2. **Audio Processing** - Converts audio to WAV format for speech recognition
 3. **Speech Recognition** - Uses Vosk for offline speech-to-text conversion
 4. **Text Output** - Saves the transcribed text to a .txt file
-5. **Cleanup** - Removes temporary audio files
+5. **Cleanup** - Deletes temporary audio files after conversion
 
 ## Supported Formats
 
@@ -75,6 +74,7 @@ python tis.py
 - MP3
 - WAV
 - OGG
+and may be extended
 
 ### Output
 - Plain text (.txt) files with UTF-8 encoding
@@ -83,21 +83,12 @@ python tis.py
 
 ### File Locations
 - Output text files are saved in the same directory as the input video
-- Temporary WAV files are automatically cleaned up after processing
 
 ### Building Executable
 You can create a standalone executable using PyInstaller that includes all dependencies and models.
 ```bash
-pyinstaller --windowed --add-data="model:model" tis.py
+pyinstaller --windowed --add-data="model:model" mit.py
 ```
-
-## Troubleshooting
-
-### Performance Tips
-
-- **Large files**: For videos longer than 30 minutes, consider splitting them into smaller chunks
-- **Audio quality**: Better audio quality results in more accurate transcription
-- **Background noise**: Minimize background noise for better recognition accuracy
 
 ## License
 
