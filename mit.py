@@ -16,11 +16,13 @@ class VideoToTextConverter:
     def __init__(self, root: tk.Tk) -> None:
         """Initialize the GUI."""
         self.root = root
-        self.root.title("Media to Text Converter")
-        self.root.geometry("540x260")
+        width = root.winfo_screenwidth()
+        height = root.winfo_screenheight()
+        self.root.geometry(f"{int(width/4)}x{int(height/4)}")
         self.root.resizable(width=False, height=False)
+        self.root.title("Media to Text Converter")
 
-        # Variables
+        # Variable
         self.selected_file = None
         self.output_file = None
 
@@ -38,7 +40,7 @@ class VideoToTextConverter:
             text="Media to Text Converter",
             font=("Arial", 16, "bold"),
         )
-        title_label.grid(row=0, column=0, columnspan=2, pady=(0, 20))
+        title_label.grid(row=0, column=0, columnspan=2, pady=(0, 10))
 
         # File selection
         ttk.Label(main_frame, text="Select media file:").grid(
@@ -55,7 +57,7 @@ class VideoToTextConverter:
             file_frame,
             text="No file selected",
             foreground="gray",
-            width=50,
+            width=40,
         )
         self.file_label.grid(row=0, column=0, sticky=(tk.W, tk.E), padx=(0, 10))
 
@@ -68,7 +70,7 @@ class VideoToTextConverter:
 
         # Progress bar
         self.progress_label = ttk.Label(main_frame, text="")
-        self.progress_label.grid(row=5, column=0, columnspan=2, pady=(20, 5))
+        self.progress_label.grid(row=5, column=0, columnspan=2, pady=(10, 5))
 
         self.progress_bar = ttk.Progressbar(main_frame, mode="determinate")
         self.progress_bar.grid(
@@ -81,7 +83,7 @@ class VideoToTextConverter:
 
         # Buttons frame
         button_frame = ttk.Frame(main_frame)
-        button_frame.grid(row=7, column=0, columnspan=2, pady=(20, 0))
+        button_frame.grid(row=7, column=0, columnspan=2, pady=(10, 0))
 
         # Configure grid weights
         main_frame.columnconfigure(0, weight=1)
